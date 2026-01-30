@@ -1,0 +1,2 @@
+export type { RegistrationUpdateEventsDTO} from '../registration/update/api/dto/registrationUpdateEvents.dto';
+export type { RegistrationCreateDTO } from '../registration/create/api/dto/registrationCreate.dto';

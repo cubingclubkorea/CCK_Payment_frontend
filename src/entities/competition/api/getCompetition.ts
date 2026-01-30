@@ -1,0 +1,66 @@
+import type { CompetitionDTO } from './dto/competition.dto';
+import type { CompetitionScheduleDTO } from './dto/competitionSchedule.dto';
+import type { Page } from '@/shared/model/page';
+import type { PageQuery } from '@/shared/query/pageQuery';
+import { mapPageableToParams } from '@/shared/query/pageQueryMapper';
+import type { Competition } from '../model/competition';
+import type { CompetitionSchedule } from '../model/competitionSchedule';
+import { CompetitionMapper } from './mapper/competitionMapper';
+import { CompetitionScheduleMapper } from './mapper/competitionScheduleMapper';
+import { rankingApiClient } from '@/shared/api/rankingBase';
+
+const BASE_URL = '/comp';
+
+/**
+ * 종료된 대회 목록 조회
+ */
+export const getCompetitionPast = async (params?: PageQuery): Promise<Page<Competition>> => {
+  const data = await rankingApiClient.get<Page<CompetitionDTO>>(`${BASE_URL}/join/past`, mapPageableToParams(params));
+  
+  return {
+    content: data.content.map(CompetitionMapper),
+    page: data.page,
+  };
+};
+
+/**
+ * 진행중인 대회 목록 조회
+ */
+export const getCompetitionNow = async (params?: PageQuery): Promise<Page<Competition>> => {
+  const data = await rankingApiClient.get<Page<CompetitionDTO>>(`${BASE_URL}/join/now`, mapPageableToParams(params));
+  
+  return {
+    content: data.content.map(CompetitionMapper),
+    page: data.page,
+  };
+};
+
+/**
+ * 예정된 대회 목록 조회
+ */
+export const getCompetitionFuture = async (params?: PageQuery): Promise<Page<Competition>> => {
+  const data = await rankingApiClient.get<Page<CompetitionDTO>>(`${BASE_URL}/join/future`, mapPageableToParams(params));
+  
+  return {
+    content: data.content.map(CompetitionMapper),
+    page: data.page,
+  };
+};
+
+/**
+ * 대회 스케줄 조회
+ */
+export const getCompetitionSchedule = async (compIdx: number): Promise<CompetitionSchedule> => {
+  const data = await rankingApiClient.get<CompetitionScheduleDTO>(`/schedule/${compIdx}`);
+  
+  return CompetitionScheduleMapper(data);
+};
+
+/**
+ * 단일 대회 조회
+ */
+export const getCompetition = async (compIdx: number): Promise<Competition> => {
+  const data = await rankingApiClient.get<CompetitionDTO>(`${BASE_URL}/${compIdx}`);
+  
+  return CompetitionMapper(data);
+};

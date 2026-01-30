@@ -1,0 +1,1 @@
+export type { TokenResponse } from '../auth/model/tokenResponse'
