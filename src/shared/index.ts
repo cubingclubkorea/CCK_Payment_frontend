@@ -1,0 +1,8 @@
+// Barrel for `src/shared`
+// Add shared utilities, hooks, and primitives here
+export { API_URL, RANKING_API_URL, SSO_URL, LOGIN_URL, ANALYTICS_ID, MODE } from './config';
+export { apiClient } from './api/base';
+export { ssoClient } from './api/authBase';
+export type { Page } from './model/page';
+export type { ErrorResponse } from './model/error';
+export * from './utils/apiHandler';
