@@ -37,13 +37,13 @@ export const RegistrationTestPage = () => {
     wcaId: "",
     emergencyPhone: "010-9876-5432",
     emergencyContact: "홍길동",
-    selectedEvents: ["333", "222"],
+    selectedEvents: ["3x3x3"],
   });
 
   // 이벤트 수정 폼
   const [updateForm, setUpdateForm] = useState<RegistrationUpdateEventsDTO>({
     registrationId: 1,
-    selectedEvents: ["333", "222", "444"],
+    selectedEvents: ["3x3x3", "4x4x4"],
   });
 
   const handleTest = async (apiFunction: () => Promise<any>, name: string) => {
